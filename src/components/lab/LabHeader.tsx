@@ -25,7 +25,7 @@ export async function LabHeader() {
         </span>
       </Link>
       <div className="lab-header-tools">
-        <Suspense fallback={<nav className="lab-nav" aria-label="Lab sections"><Link href="/">Create</Link><Link href="/?mode=duel">Vote</Link></nav>}><StudioNavigation signedIn={Boolean(user)} /></Suspense>
+        <Suspense fallback={<nav className="lab-nav" aria-label="Main"><Link href="/">Create</Link><Link href="/?mode=duel">Vote</Link></nav>}><StudioNavigation signedIn={Boolean(user)} /></Suspense>
         <AuthControls signedIn={Boolean(user)} />
         {user ? <ProfileBadge name={profile?.first_name?.trim() || "Your profile"} photo={profile?.avatar_path ? `/profile/photo?v=${encodeURIComponent(profile.updated_at)}` : null} /> : null}
       </div>

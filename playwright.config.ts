@@ -6,5 +6,5 @@ export default defineConfig({
   workers: 1,
   timeout: 30_000,
   reporter: "list",
-  use: { baseURL: process.env.PUNNETT_TEST_URL ?? "http://localhost:3000", channel: "chrome", headless: true, trace: "retain-on-failure" },
+  use: { baseURL: process.env.PUNNETT_TEST_URL ?? "http://localhost:3000", headless: true, trace: "retain-on-failure" },
 });

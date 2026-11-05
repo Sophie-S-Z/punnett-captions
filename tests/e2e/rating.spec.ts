@@ -12,14 +12,14 @@ test("anonymous direct selection requests are denied on the server", async ({ re
 test("cross-origin selection and anonymous generation submissions are rejected", async ({ request }) => {
   const selection = await request.post("/api/selection", { headers: { origin: "https://example.org" }, data: {} });
   expect(selection.status()).toBe(403);
-  const generation = await request.post("/incubator", { maxRedirects: 0, form: { prompt: "Anonymous must not generate" } });
+  const generation = await request.post("/discover", { maxRedirects: 0, form: { prompt: "Anonymous must not generate" } });
   expect(generation.status()).toBe(307);
   expect(new URL(generation.headers().location, "http://localhost:3000").pathname).toBe("/");
 });
 
-test("visitors see the selection chamber and cannot judge real live captions", async ({ page }) => {
+test("visitors see the voting pair and cannot judge real live captions", async ({ page }) => {
   await page.goto("/?mode=duel");
-  const chamber = page.getByRole("region", { name: "Selection chamber", exact: true });
+  const chamber = page.getByRole("region", { name: "Vote on captions", exact: true });
   await expect(chamber).toBeVisible();
   await expect(chamber.getByRole("heading", { name: "Which caption is funnier?" })).toBeVisible();
   const cards = chamber.locator(".duel-card");
@@ -51,20 +51,20 @@ test.describe("actual authenticated rating acceptance", () => {
   test.use({ storageState: process.env.PUNNETT_AUTH_STATE ?? { cookies: [], origins: [] } });
   test.skip(!process.env.PUNNETT_AUTH_STATE, "Provide an ignored Playwright storage-state file from a real Google session.");
 
-  test("incubator rejects corrupt image contents and releases its pending controls", async ({ page }) => {
-    await page.goto("/incubator");
+  test("the image upload rejects corrupt image contents and releases its pending controls", async ({ page }) => {
+    await page.goto("/");
     await expect(page.getByRole("button", { name: "Sign out", exact: true })).toBeVisible();
-    const input = page.locator("#culture-image");
+    const input = page.locator("#create-image");
     await expect(input).toHaveAttribute("accept", "image/*");
-    const camera = page.locator(".culture-camera input");
+    const camera = page.locator(".create-camera input");
     await expect(camera).toHaveAttribute("accept", "image/*");
     await expect(camera).toHaveAttribute("capture", "environment");
     // Deliberately invalid bytes exercise validation before any model or database call.
     await input.setInputFiles({ name: "corrupt-test.png", mimeType: "image/png", buffer: Buffer.from("invalid image contents") });
     await page.getByRole("button", { name: "Generate captions" }).click();
-    await expect(page.locator(".culture-error")).toBeVisible();
-    await expect(page.locator(".culture-error")).toContainText("could not read this image");
-    await expect(page.locator(".culture-form")).toHaveAttribute("aria-busy", "false");
+    await expect(page.locator(".create-error")).toBeVisible();
+    await expect(page.locator(".create-error")).toContainText("could not read this image");
+    await expect(page.locator(".create-form")).toHaveAttribute("aria-busy", "false");
     await expect(input).toBeEnabled();
     await expect(page.getByRole("button", { name: "Generate captions" })).toBeEnabled();
     await expect(page.getByRole("region", { name: "Generated captions" })).toHaveCount(0);
@@ -106,7 +106,7 @@ test.describe("actual authenticated rating acceptance", () => {
     const loserText = (await cards.nth(1).getAttribute("aria-label"))!.replace(/^Choose caption B: /, "");
     await cards.first().click();
     await expect(page.getByText("Selection saved.", { exact: true })).toBeVisible();
-    await expect(page.getByRole("region", { name: "Selection chamber", exact: true })).toHaveAttribute("aria-busy", "false");
+    await expect(page.getByRole("region", { name: "Vote on captions", exact: true })).toHaveAttribute("aria-busy", "false");
     await page.goto("/lab/notebook");
     await expect(page.getByText(winnerText, { exact: true })).toBeVisible();
     await expect(page.getByText(loserText, { exact: true })).toBeVisible();

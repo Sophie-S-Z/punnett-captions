@@ -1,3 +1,5 @@
+> User override — 2026-11-05: Remove the retired biology metaphor from the applications. Use captions, images, votes, prompt chains, and steps. The refined shared design uses Geist and neutral graphite tokens. The user's current branding and design direction supersedes legacy terminology, component names, and visual tokens below. All auth, role, data, deployment, and row-security rules remain in force.
+
 # AGENTS.md: Punnett build spec
 
 Project: The Humor Project, Columbia University, Fall 2026.

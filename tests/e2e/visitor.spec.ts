@@ -8,7 +8,7 @@ for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    for (const path of ["/", "/?mode=duel", "/specimens"]) {
+    for (const path of ["/", "/?mode=duel"]) {
       const response = await page.goto(path);
       expect(response?.status()).toBe(200);
       await expect(page.locator("h1")).toBeVisible();
@@ -21,7 +21,7 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test("visitors cannot open protected routes or private photos", async ({ page }) => {
-  for (const path of ["/profile", "/profile/photo", "/lab/notebook", "/lab/notebook/created", "/lab/notebook/collection", "/incubator", "/discover"]) {
+  for (const path of ["/profile", "/profile/photo", "/lab/notebook", "/lab/notebook/created", "/lab/notebook/collection", "/discover"]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/$/);
     await expect(page.locator("h1")).toContainText("Your camera roll.");
@@ -39,7 +39,7 @@ test("a malformed session cookie cannot bypass the server guard", async ({ page,
 test("failed OAuth callback offers a retry instead of failing the page", async ({ page }) => {
   await page.goto("/auth/callback?error=access_denied");
   await expect(page).toHaveURL(/\/\?auth=failed$/);
-  await expect(page.locator("p[role=alert]")).toContainText("Sign-in was not completed");
+  await expect(page.locator("p[role=alert]")).toContainText("Sign-in did not finish");
 });
 
 test("Google sign-in requests the exact callback on the current app origin", async ({ page, baseURL }) => {

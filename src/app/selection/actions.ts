@@ -6,7 +6,7 @@ import { loadPair } from "@/lib/supabase/rating";
 import type { VoteResult } from "@/lib/punnett/rating";
 import { castVote } from "@/lib/punnett/voting";
 
-export async function selectSpecimen(winnerId: string, loserId: string): Promise<VoteResult> {
+export async function submitVote(winnerId: string, loserId: string): Promise<VoteResult> {
   try {
     const client = await createClient();
     const result = await castVote(winnerId, loserId, {
@@ -16,7 +16,7 @@ export async function selectSpecimen(winnerId: string, loserId: string): Promise
     if (result.ok) revalidatePath("/lab/notebook");
     return result;
   } catch {
-    return { ok: false, error: "The selection could not be saved. Please try again." };
+    return { ok: false, error: "Your vote was not saved. Please try again." };
   }
 }
 

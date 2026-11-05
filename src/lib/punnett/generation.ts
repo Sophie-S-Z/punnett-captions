@@ -1,6 +1,6 @@
 import type { CaptionCandidate } from "./pairing";
 
-export type GenerationStage = "culturing" | "sequencing" | "hatching";
+export type GenerationStage = "upload" | "generate" | "save";
 export type GenerationResult =
   | { ok: true; imageId: string; captions: CaptionCandidate[] }
   | { ok: false; error: string; stage: GenerationStage };

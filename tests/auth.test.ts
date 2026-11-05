@@ -3,8 +3,8 @@ import test from "node:test";
 import { authCallbackUrl, isProtectedPath } from "../src/lib/punnett/auth.ts";
 
 test("gates nested protected routes without gating similarly named public paths", () => {
-  for (const path of ["/profile", "/profile/edit", "/lab/notebook", "/incubator", "/incubator/upload", "/discover", "/discover/private"]) assert.equal(isProtectedPath(path), true);
-  for (const path of ["/", "/specimens", "/auth/callback", "/profiles", "/incubators", "/discoveries"]) assert.equal(isProtectedPath(path), false);
+  for (const path of ["/profile", "/profile/edit", "/lab/notebook", "/discover", "/discover/private"]) assert.equal(isProtectedPath(path), true);
+  for (const path of ["/", "/create", "/auth/callback", "/profiles", "/incubators", "/discoveries"]) assert.equal(isProtectedPath(path), false);
 });
 
 test("OAuth callback uses the current origin and exact path without query parameters", () => {

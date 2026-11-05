@@ -7,10 +7,10 @@ import { createClient } from "@/lib/supabase/server";
 import { buildGenerationPrompt, geminiRequest, MAX_IMAGE_BYTES, parseGeneratedCaptions, validateUpload } from "@/lib/punnett/generation";
 import type { GenerationResult, GenerationStage } from "@/lib/punnett/generation";
 
-export async function generateSpecimens(formData: FormData): Promise<GenerationResult> {
+export async function generateCaptions(formData: FormData): Promise<GenerationResult> {
   const startedAt = Date.now();
   let providerStatus: number | null = null;
-  let stage: GenerationStage = "culturing";
+  let stage: GenerationStage = "upload";
   let generationId: string | null = null;
   let storagePath: string | null = null;
   let client: Awaited<ReturnType<typeof createClient>> | null = null;
@@ -55,7 +55,7 @@ export async function generateSpecimens(formData: FormData): Promise<GenerationR
       return { ok: false, error: createError?.message?.includes("daily_limit") ? "You can generate captions 10 times in 24 hours. Please try again later." : "Your image could not be saved. Please contact the app owner if this continues.", stage };
     }
     generationId = generation.id;
-    stage = "sequencing";
+    stage = "generate";
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
       body: JSON.stringify(geminiRequest(prompt, base64)), signal: AbortSignal.timeout(45_000), cache: "no-store",
@@ -63,25 +63,25 @@ export async function generateSpecimens(formData: FormData): Promise<GenerationR
     providerStatus = response.status;
     if (!response.ok) throw new Error(response.status === 429 ? "provider_quota" : "Generation request failed.");
     const captions = parseGeneratedCaptions(await response.json());
-    stage = "hatching";
+    stage = "save";
     const { data: completed, error: completeError } = await client.rpc("punnett_complete_generation", {
       generation_id_input: generationId, captions_input: captions,
     });
     if (completeError || !completed?.image_id || !Array.isArray(completed.captions)) throw new Error("Saving captions failed.");
     revalidatePath("/");
-    revalidatePath("/incubator");
+    revalidatePath("/");
     revalidatePath("/lab/notebook/created");
     return { ok: true, imageId: completed.image_id, captions: completed.captions };
   } catch (cause) {
     console.error("[punnett:generation-failed]", JSON.stringify({
       generationId, stage, providerStatus, durationMs: Date.now() - startedAt,
-      reason: cause instanceof Error && cause.name === "TimeoutError" ? "timeout" : providerStatus === 429 ? "quota" : stage === "hatching" ? "persistence" : "provider_or_output",
+      reason: cause instanceof Error && cause.name === "TimeoutError" ? "timeout" : providerStatus === 429 ? "quota" : stage === "save" ? "persistence" : "provider_or_output",
     }));
     if (generationId && client) {
       // Cleanup is best-effort. A network failure must still produce a recoverable UI.
       try { await client.rpc("punnett_fail_generation", { generation_id_input: generationId }); } catch { /* No secrets or provider output in logs. */ }
     }
-    const error = cause instanceof Error && cause.message === "provider_quota" ? "Caption generation is temporarily rate limited. Please try again later." : stage === "sequencing" ? "Caption generation stopped. Try another image or try again shortly. Your image may have been declined by the model." : stage === "hatching" ? "The captions could not be saved. Please try again." : "Caption generation is unavailable. Please try again.";
+    const error = cause instanceof Error && cause.message === "provider_quota" ? "Caption generation is temporarily rate limited. Please try again later." : stage === "generate" ? "Caption generation stopped. Try another image or try again shortly. Your image may have been declined by the model." : stage === "save" ? "The captions could not be saved. Please try again." : "Caption generation is unavailable. Please try again.";
     return { ok: false, error, stage };
   }
 }

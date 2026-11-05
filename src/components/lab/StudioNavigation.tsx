@@ -5,5 +5,5 @@ export function StudioNavigation({ signedIn }: { signedIn: boolean }) {
   const path = usePathname();
   const query = useSearchParams();
   const voting = path === "/" && (query.get("mode") === "duel" || Boolean(query.get("image")));
-  return <nav className="lab-nav" aria-label="Lab sections"><Link href="/" aria-current={(path === "/" && !voting) || path === "/incubator" ? "page" : undefined}>Create</Link><Link href="/?mode=duel" aria-current={voting ? "page" : undefined}>Vote</Link>{signedIn ? <Link href="/lab/notebook/created" aria-current={path.startsWith("/lab/notebook") ? "page" : undefined}>History</Link> : null}</nav>;
+  return <nav className="lab-nav" aria-label="Main"><Link href="/" aria-current={(path === "/" && !voting) ? "page" : undefined}>Create</Link><Link href="/?mode=duel" aria-current={voting ? "page" : undefined}>Vote</Link>{signedIn ? <Link href="/lab/notebook/created" aria-current={path.startsWith("/lab/notebook") ? "page" : undefined}>History</Link> : null}</nav>;
 }

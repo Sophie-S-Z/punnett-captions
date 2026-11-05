@@ -13,19 +13,18 @@ Run `npm run test:e2e` against `PUNNETT_TEST_URL`. Authenticated tests need an o
 
 - `/`: image upload and caption creation; Google sign-in for visitors.
 - `/?mode=duel`: public image/caption preview; voting requires login.
-- `/incubator`: signed-in upload route.
 - `/lab/notebook/created`: own generated captions with images.
 - `/lab/notebook`: own paired vote history with images.
 - `/profile`: own names and optional private profile photo.
 - `/auth/callback`: exact OAuth callback.
 - `/media/{id}`: completed, nonarchived images from Storage.
 
-Old `/specimens`, `/discover`, and collection bookmarks redirect to the active caption experience. Biology discovery and survival-rating endpoints are removed.
+Old `/discover` and collection bookmarks redirect to the home page.
 
 ## Database and deployment
 
 Existing owner-run W3/W4 migrations establish profiles, signup trigger, narrow ownership-checked RPCs, and app-owned rating tables. The current storage/archive cutover is `docs/w5-caption-storage.sql`.
-**Apply the owner steps in [docs/w5-owner-cutover.md](docs/w5-owner-cutover.md) before deploying this revision.** The cutover archives the old biology generations and preserves recent general-humor images for an owner-scoped Storage transfer. Run `docs/w5-finish-storage.sql` after transfer to remove the obsolete base64 image field. New files live in the private `caption-images` bucket; rows retain paths and exact prompts.
+**Apply the owner steps in [docs/w5-owner-cutover.md](docs/w5-owner-cutover.md) before deploying this revision.** The cutover archives the old generations and preserves recent general-humor images for an owner-scoped Storage transfer. Run `docs/w5-finish-storage.sql` after transfer to remove the obsolete base64 image field. New files live in the private `caption-images` bucket; rows retain paths and exact prompts.
 
 AGENTS.md prohibits agent changes to RLS policies. The owner must configure Storage access and audit RLS across the existing tables. Keep Vercel deployment protection disabled and allowlist each immutable deployment's exact `/auth/callback`.
 
