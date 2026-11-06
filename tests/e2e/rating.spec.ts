@@ -28,7 +28,7 @@ test("visitors see the voting pair and cannot judge real live captions", async (
     await expect(cards.nth(0)).toBeDisabled();
     await expect(cards.nth(1)).toBeDisabled();
     await expect(chamber.getByRole("button", { name: "Skip pair", exact: true })).toBeDisabled();
-    await expect(chamber.locator(".chamber-glass")).toBeVisible();
+    await expect(chamber.locator(".voting-glass")).toBeVisible();
     const image = chamber.locator(".duel-image img");
     await expect(image).toHaveAttribute("src", /^\/media\/[a-f0-9-]+$/);
     await expect(image).toBeVisible();
