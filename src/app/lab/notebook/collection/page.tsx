@@ -1,2 +1,1 @@
-import { redirect } from "next/navigation";
-export default function LegacyPage() { redirect("/lab/notebook"); }
+import {redirect} from 'next/navigation';export default function LegacyPage(){redirect('/history');}

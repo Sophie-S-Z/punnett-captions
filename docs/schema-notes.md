@@ -253,3 +253,8 @@ The owner confirmed the selective migration, private caption-images bucket, four
 ## Owner finish confirmation — 2026-10-15
 
 After the recent meme image transferred successfully and fresh deployed generation/voting/export passed, the owner ran w5-finish-storage.sql and confirmed success. The owner confirmed storage_path remains and data_url is removed. This completes the owner-managed three-step Storage cutover. No live schema-owner credential or browser session was exported to the agent. No live RLS policy change was performed by the agent.
+
+
+## 2026-11-06 release verification
+
+Inspected the actual public caption/generation and private studio/history tables. The owner-approved 2026-11-05 content retirement remains applied. The reviewed text fields contain no retired vocabulary; 28 real captions remain public. All 153 originals remain in the owner-only private archive with no client grants. No schema, row-security policy, or auth permission changed during this release. `/history` is the canonical history route; old history URLs redirect.

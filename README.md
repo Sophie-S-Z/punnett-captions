@@ -13,8 +13,8 @@ Run `npm run test:e2e` against `PUNNETT_TEST_URL`. Authenticated tests need an o
 
 - `/`: image upload and caption creation; Google sign-in for visitors.
 - `/?mode=duel`: public image/caption preview; voting requires login.
-- `/lab/notebook/created`: own generated captions with images.
-- `/lab/notebook`: own paired vote history with images.
+- `/history/created`: own generated captions with images.
+- `/history`: own paired vote history with images.
 - `/profile`: own names and optional private profile photo.
 - `/auth/callback`: exact OAuth callback.
 - `/media/{id}`: completed, nonarchived images from Storage.
@@ -28,6 +28,6 @@ Existing owner-run W3/W4 migrations establish profiles, signup trigger, narrow o
 
 AGENTS.md prohibits agent changes to RLS policies. The owner must configure Storage access and audit RLS across the existing tables. Keep Vercel deployment protection disabled and allowlist each immutable deployment's exact `/auth/callback`.
 
-Historical species documents are deployment provenance, not active app data or current product instructions. Do not rerun their seeds or migrations.
+Historical catalog documents are deployment provenance, not active app data or current product instructions. Do not rerun their seeds or migrations.
 
 The 2026-10-15 caption studio adds optional tone presets, a context-length counter, searchable creations, Chosen/Passed vote filters, and reduced-motion-safe upload/selection details. See docs/design-references.md for reviewed components and adaptations.

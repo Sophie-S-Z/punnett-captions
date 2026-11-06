@@ -64,7 +64,7 @@ export async function saveProfile(_previous: ProfileFormState, form: FormData): 
       // A lost response does not mean the database rejected the write.
       // Read back before removing a photo that the row might now reference.
       const { data: readback, error: readError } = await supabase.rpc("punnett_get_profile");
-      if (readError) return fail("The lab connection was interrupted. Reload your profile to check whether the save completed.");
+      if (readError) return fail("The connection was interrupted. Reload your profile to check whether the save completed.");
       const profile = parseProfile(readback);
       if (profile.first_name !== firstName || profile.last_name !== lastName || (uploadedPath && profile.avatar_path !== uploadedPath)) {
         if (uploadedPath && profile.avatar_path !== uploadedPath) await supabase.storage.from("profile-photos").remove([uploadedPath]);
@@ -79,10 +79,10 @@ export async function saveProfile(_previous: ProfileFormState, form: FormData): 
     }
     revalidatePath("/", "layout");
     revalidatePath("/profile");
-    revalidatePath("/lab/notebook");
+    revalidatePath("/history");
     return { status: "success", message: "Profile saved.", firstName: saved.first_name ?? "", lastName: saved.last_name ?? "" };
   } catch {
     if (uploadedPath && !saveAttempted) await supabase.storage.from("profile-photos").remove([uploadedPath]).catch(() => undefined);
-    return fail("The lab connection was interrupted. Reload your profile to check whether the save completed.");
+    return fail("The connection was interrupted. Reload your profile to check whether the save completed.");
   }
 }

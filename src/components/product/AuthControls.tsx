@@ -35,7 +35,7 @@ export function AuthControls({ signedIn = false }: { signedIn?: boolean }) {
     }
   }
 
-  return <div className="auth-controls"><button className="lab-button" onClick={authenticate} disabled={pending}>
+  return <div className="auth-controls"><button className="app-button" onClick={authenticate} disabled={pending}>
     {pending ? "One moment…" : signedIn ? "Sign out" : "Sign in with Google"}
   </button>{error ? <p className="form-error" role="alert">{error}</p> : null}</div>;
 }

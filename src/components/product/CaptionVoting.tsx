@@ -8,15 +8,15 @@ import { toast } from "sonner";
 import { nextPair, submitVote } from "@/app/selection/actions";
 import type { CaptionPair } from "@/lib/punnett/pairing";
 import { AuthControls } from "./AuthControls";
-import { LabLoader } from "./LabLoader";
+import { ProgressFeedback } from "./ProgressFeedback";
 
-type SelectionChamberProps = {
+type CaptionVotingProps = {
   signedIn: boolean;
   initialPair: CaptionPair | null;
   initialError?: string;
 };
 
-export function SelectionChamber({ signedIn, initialPair, initialError }: SelectionChamberProps) {
+export function CaptionVoting({ signedIn, initialPair, initialError }: CaptionVotingProps) {
   const [pair, setPair] = useState(initialPair);
   const [error, setError] = useState(initialError ?? "");
   const [pending, setPending] = useState(false);
@@ -87,7 +87,7 @@ export function SelectionChamber({ signedIn, initialPair, initialError }: Select
 
   return <section className="selection-chamber" aria-label="Vote on captions" aria-busy={pending}>
     <div className="chamber-heading"><h1>Which caption is funnier?</h1>{signedIn ? <Link className="text-link" href="/">Create captions</Link> : null}</div>
-    {error ? <div className="chamber-error" role="alert"><p>{error}</p><button type="button" className="lab-button button-quiet" onClick={() => signedIn ? void skip() : window.location.reload()} disabled={pending}>Try loading again</button>{signedIn ? <Link className="text-link" href="/lab/notebook">See your vote history</Link> : null}</div> : null}
+    {error ? <div className="chamber-error" role="alert"><p>{error}</p><button type="button" className="app-button button-quiet" onClick={() => signedIn ? void skip() : window.location.reload()} disabled={pending}>Try loading again</button>{signedIn ? <Link className="text-link" href="/history">See your vote history</Link> : null}</div> : null}
     {pair ? <div className="duel-stage">
       <div className={`duel-layout ${!signedIn ? "duel-locked" : ""}`}>
         <figure className="duel-image"><Image src={`/media/${pair.imageId}`} alt="The image used to generate both captions" width={1200} height={900} unoptimized /></figure>
@@ -100,11 +100,11 @@ export function SelectionChamber({ signedIn, initialPair, initialError }: Select
             </motion.button>;
           })}
         </motion.div></AnimatePresence>
-          <div className="duel-controls"><p className="field-help">{signedIn ? <><kbd>A</kbd> left · <kbd>B</kbd> right · <kbd>S</kbd> skip</> : "Sign in to vote for a caption."}</p><button type="button" className="lab-button button-quiet" disabled={!signedIn || pending} onClick={() => void skip()}>Skip pair</button></div>
+          <div className="duel-controls"><p className="field-help">{signedIn ? <><kbd>A</kbd> left · <kbd>B</kbd> right · <kbd>S</kbd> skip</> : "Sign in to vote for a caption."}</p><button type="button" className="app-button button-quiet" disabled={!signedIn || pending} onClick={() => void skip()}>Skip pair</button></div>
         </div>
       </div>
       {!signedIn ? <div className="chamber-glass"><div><h2>Found your favorite?</h2><p>Sign in with Google to vote, or to make captions for your own image.</p><AuthControls /></div></div> : null}
-    </div> : pending ? <LabLoader label="Loading captions…" description="Finding your next pair of captions." /> : !error ? <div className="chamber-empty"><h3>{signedIn ? "No unrated caption pairs right now." : "No caption pairs yet."}</h3>{signedIn ? <><p>Upload an image to create more captions.</p><Link className="lab-button button-primary" href="/">Create captions</Link></> : <><p>Sign in to create captions from your own images.</p><AuthControls /></>}</div> : null}
+    </div> : pending ? <ProgressFeedback label="Loading captions…" description="Finding your next pair of captions." /> : !error ? <div className="chamber-empty"><h3>{signedIn ? "No unrated caption pairs right now." : "No caption pairs yet."}</h3>{signedIn ? <><p>Upload an image to create more captions.</p><Link className="app-button button-primary" href="/">Create captions</Link></> : <><p>Sign in to create captions from your own images.</p><AuthControls /></>}</div> : null}
     {pending && pair ? <p className="chamber-pending" role="status">{winner ? "Vote saved. Loading the next pair…" : "Saving or loading captions…"}</p> : null}
   </section>;
 }

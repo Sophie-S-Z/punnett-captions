@@ -19,9 +19,9 @@ export function ProfileForm({ profile }: { profile: Profile }) {
       </div>
       <div className="profile-name-grid"><div><label htmlFor="first_name">First name</label><input name="first_name" id="first_name" required maxLength={100} autoComplete="given-name" defaultValue={state.firstName ?? profile.first_name ?? ""} /></div>
       <div><label htmlFor="last_name">Last name</label><input name="last_name" id="last_name" required maxLength={100} autoComplete="family-name" defaultValue={state.lastName ?? profile.last_name ?? ""} /></div></div>
-      <button type="submit" className="lab-button">{pending ? "Saving…" : "Save profile"}</button>
+      <button type="submit" className="app-button">{pending ? "Saving…" : "Save profile"}</button>
     </fieldset>
     {state.message ? <p role={state.status === "error" ? "alert" : "status"} className={state.status === "error" ? "form-error" : "form-success"}>{state.message}</p> : null}
-    {state.status === "success" ? <Link className="text-link" href="/lab/notebook">Open your caption history</Link> : null}
+    {state.status === "success" ? <Link className="text-link" href="/history">Open your caption history</Link> : null}
   </form>;
 }

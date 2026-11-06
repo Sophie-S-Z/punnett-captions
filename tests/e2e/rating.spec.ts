@@ -107,7 +107,7 @@ test.describe("actual authenticated rating acceptance", () => {
     await cards.first().click();
     await expect(page.getByText("Selection saved.", { exact: true })).toBeVisible();
     await expect(page.getByRole("region", { name: "Vote on captions", exact: true })).toHaveAttribute("aria-busy", "false");
-    await page.goto("/lab/notebook");
+    await page.goto("/history");
     await expect(page.getByText(winnerText, { exact: true })).toBeVisible();
     await expect(page.getByText(loserText, { exact: true })).toBeVisible();
     const newest = page.locator(".selection-history li");

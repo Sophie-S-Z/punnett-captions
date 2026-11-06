@@ -14,7 +14,7 @@ test("signed-in caption history contains descriptive labels instead of codes", a
   const context = await browser.newContext({ storageState: process.env.PUNNETT_AUTH_STATE });
   try {
     const page = await context.newPage();
-    for (const route of ["/lab/notebook", "/lab/notebook/created"]) {
+    for (const route of ["/history", "/history/created"]) {
       await page.goto(route);
       await expect(page).toHaveURL(new RegExp(`${route}$`));
       await expect(page.locator("main")).not.toContainText(/\b[ACGT]{4}-\d{4}\b/);

@@ -70,7 +70,7 @@ export async function generateCaptions(formData: FormData): Promise<GenerationRe
     if (completeError || !completed?.image_id || !Array.isArray(completed.captions)) throw new Error("Saving captions failed.");
     revalidatePath("/");
     revalidatePath("/");
-    revalidatePath("/lab/notebook/created");
+    revalidatePath("/history/created");
     return { ok: true, imageId: completed.image_id, captions: completed.captions };
   } catch (cause) {
     console.error("[punnett:generation-failed]", JSON.stringify({

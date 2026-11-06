@@ -1,0 +1,292 @@
+/* Shared product proportions. Preserve the simplified review-feedback flows. */
+body {
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+.brand {
+  letter-spacing: -0.025em;
+}
+.app-shell {
+  max-width: 1280px;
+  padding-inline: 40px;
+}
+.app-header {
+  min-height: 76px;
+  gap: 24px;
+}
+.brand {
+  font-size: 24px;
+  gap: 10px;
+  letter-spacing: -0.035em;
+}
+.brand-mark {
+  width: 30px;
+  height: 30px;
+  color: var(--text);
+}
+.brand-subtitle {
+  font-size: 11px;
+  margin-top: 5px;
+}
+.app-nav a {
+  padding: 8px 14px;
+  border-radius: 7px;
+  color: var(--text-muted);
+}
+.app-nav a[aria-current="page"] {
+  background: var(--surface-active);
+  color: var(--text);
+}
+.app-button {
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--surface);
+}
+.app-button:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+}
+.app-button.button-primary {
+  background: var(--primary);
+  color: var(--primary-text);
+  border-color: var(--primary);
+}
+.caption-intro {
+  padding-top: 32px;
+  max-width: 700px;
+}
+.caption-intro h1 {
+  font-size: clamp(32px, 3.5vw, 44px);
+  line-height: 1.15;
+  margin: 16px 0;
+  letter-spacing: -0.04em;
+}
+.caption-intro .intro {
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.annotated-text {
+  color: var(--text);
+  font-family: var(--font-ui), sans-serif;
+}
+.caption-welcome {
+  max-width: 620px;
+  margin: 28px 0 64px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.caption-welcome > p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.caption-welcome .auth-controls .app-button {
+  background: var(--primary);
+  color: var(--primary-text);
+  border-color: var(--primary);
+  padding: 10px 18px;
+}
+.caption-welcome .field-help {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.create-workspace {
+  margin: 28px 0 56px;
+}
+.create-form {
+  border-radius: 12px;
+}
+.create-upload {
+  margin: 0;
+  outline: 0;
+  border: 0;
+  border-right: 1px solid var(--border);
+  border-radius: 0;
+  padding: 36px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 380px;
+}
+.create-upload[data-dragging="true"] {
+  background: var(--selected);
+}
+.create-upload .field-help {
+  color: var(--text-muted);
+  font-size: 12px;
+  max-width: 38ch;
+}
+.create-file-label {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+.create-upload .choose-image {
+  margin-top: 18px;
+  background: var(--primary);
+  color: var(--primary-text);
+  border-color: var(--primary);
+}
+.create-upload .app-button.button-quiet {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+.create-upload :focus-visible {
+  outline-color: var(--focus);
+}
+.create-upload .create-camera {
+  display: block;
+  margin: 12px 0;
+}
+.create-upload .create-camera button {
+  min-height: 36px;
+  font-size: 12px;
+}
+.create-instructions {
+  padding: 32px;
+}
+.create-instructions h2 {
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+}
+.create-description {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.tone-picker button {
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.tone-picker button[aria-pressed="true"] {
+  background: var(--selected);
+  color: var(--text);
+  border-color: var(--accent);
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  border-color: var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--field);
+}
+.create-submit {
+  width: 100%;
+}
+.prompt-count,
+.field-help {
+  font-size: 12px;
+}
+.create-results h2,
+.page-heading h1 {
+  font-size: 28px;
+}
+.result-card,
+.history-caption,
+.duel-card {
+  border-radius: 12px;
+}
+.duel-caption {
+  font-size: clamp(18px, 1.7vw, 24px);
+  letter-spacing: -0.02em;
+}
+.duel-key,
+kbd {
+  font-family: var(--font-code), monospace;
+}
+.voting-glass > div {
+  border-radius: 12px;
+  box-shadow: none;
+}
+.profile-form {
+  border-radius: 12px;
+}
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .app-shell {
+    padding-inline: 20px;
+  }
+  .app-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    min-height: 72px;
+    padding: 16px 0;
+    gap: 12px;
+  }
+  .app-header > .brand {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 22px;
+  }
+  .app-header-tools {
+    display: contents;
+  }
+  .app-header-tools .auth-controls {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    width: auto;
+  }
+  .app-header-tools .auth-controls .app-button {
+    width: auto;
+    min-height: 36px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  .app-header .app-nav {
+    grid-column: 1/-1;
+    grid-row: 2;
+    justify-content: start;
+    margin: 0;
+  }
+  .app-header .profile-badge {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+  .caption-intro h1 {
+    font-size: 32px;
+  }
+  .caption-welcome {
+    padding: 24px;
+  }
+  .create-upload {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 28px 20px;
+    min-height: 300px;
+  }
+  .create-instructions {
+    padding: 24px 20px;
+  }
+  .create-results h2 {
+    font-size: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

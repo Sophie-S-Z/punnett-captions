@@ -13,7 +13,7 @@ export async function submitVote(winnerId: string, loserId: string): Promise<Vot
       authenticate: async () => { const { data, error } = await client.auth.getUser(); return Boolean(data.user && !error); },
       insertPair: async (winner, loser) => client.rpc("punnett_select_vote", { winner_id_input: winner, loser_id_input: loser }),
     });
-    if (result.ok) revalidatePath("/lab/notebook");
+    if (result.ok) revalidatePath("/history");
     return result;
   } catch {
     return { ok: false, error: "Your vote was not saved. Please try again." };

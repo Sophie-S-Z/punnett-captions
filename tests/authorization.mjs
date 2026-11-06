@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 
 const origin = process.env.PUNNETT_TEST_URL ?? "http://localhost:3000";
-for (const path of ["/profile", "/lab/notebook", "/lab/notebook/created", "/discover"]) {
+for (const path of ["/profile", "/history", "/history/created", "/discover"]) {
   const response = await fetch(new URL(path, origin), {
     method: "POST", redirect: "manual",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },

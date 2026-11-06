@@ -21,7 +21,7 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test("visitors cannot open protected routes or private photos", async ({ page }) => {
-  for (const path of ["/profile", "/profile/photo", "/lab/notebook", "/lab/notebook/created", "/lab/notebook/collection", "/discover"]) {
+  for (const path of ["/profile", "/profile/photo", "/history", "/history/created", "/history/collection", "/discover"]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/$/);
     await expect(page.locator("h1")).toContainText("Your camera roll.");
@@ -32,7 +32,7 @@ test("visitors cannot open protected routes or private photos", async ({ page })
 
 test("a malformed session cookie cannot bypass the server guard", async ({ page, context, baseURL }) => {
   await context.addCookies([{ name: "sb-ralfwrckxnaieamlttmm-auth-token", value: "base64-invalid", url: baseURL! }]);
-  await page.goto("/lab/notebook");
+  await page.goto("/history");
   await expect(page).toHaveURL(/\/$/);
 });
 

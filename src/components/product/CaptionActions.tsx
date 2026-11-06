@@ -63,5 +63,5 @@ export function CaptionActions({ text, imageId }: { text: string; imageId: strin
       setPending(false);
     }
   }
-  return <div className="caption-actions"><button type="button" className="lab-button button-quiet" onClick={() => void copy()}>Copy caption</button><button type="button" className="lab-button button-quiet" disabled={pending} onClick={() => void download()}>{pending ? "Downloading…" : "Download meme"}</button></div>;
+  return <div className="caption-actions"><button type="button" className="app-button button-quiet" onClick={() => void copy()}>Copy caption</button><button type="button" className="app-button button-quiet" disabled={pending} onClick={() => void download()}>{pending ? "Downloading…" : "Download meme"}</button></div>;
 }

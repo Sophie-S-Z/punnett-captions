@@ -1,26 +1,37 @@
 :root,
 [data-theme="night"] {
-  /* Shared with Observatory: aubergine, apricot, and periwinkle. */
-  --bg: #181522;
-  --surface: #242032;
-  --surface-active: #332c43;
-  --border: #625773;
-  --glow: #ffbe98;
-  --glow-soft: #d9cfe5;
-  --glow-deep: #945d44;
-  --text: #f4edf9;
-  --text-muted: #b9abc9;
-  --ink: #e7cb87;
-  --accent-2: #b4c5ff;
-  --accent-2-deep: #59668e;
-  --danger: #ffa9be;
-  --paper: #e8e4f3;
-  --paper-ink: #2d243d;
-  --paper-muted: #63566f;
-  --paper-line: #9f91ad;
+  color-scheme: dark;
+  --bg: #111214;
+  --surface: #1a1b1e;
+  --surface-active: #26282c;
+  --border: #2c2e33;
+  --text: #ededef;
+  --text-muted: #8e9199;
+  --accent: #9db4ff;
+  --accent-soft: #e0e7ff;
+  --accent-strong: #7c98ee;
+  --annotation: #c2c8d4;
+  --secondary: #aab4c7;
+  --secondary-strong: #62718c;
+  --danger: #ff9ba6;
+  --paper: #f6f7f9;
+  --paper-ink: #171a21;
+  --paper-muted: #5d6675;
+  --paper-line: #d6dae2;
+  --font-code: var(--font-ui);
   --radius: 12px;
-  --radius-panel: 20px;
-  --radius-control: 10px;
+  --radius-panel: 16px;
+  --radius-control: 8px;
   --glass-edge: var(--border);
-  --surface-shadow: 0 20px 60px #10091f40;
+  --shadow: 0 16px 48px #06070a40;
+  --surface-shadow: 0 16px 48px #06070a40;
+  --primary: #ededef;
+  --primary-text: #111214;
+  --focus: var(--accent);
+  --selected: #26282c;
+  --field: #16171a;
+  --placeholder: #7a7d85;
+  --border-strong: #4a4d55;
+  --text-secondary: #c4c6cc;
+  --focus-ring: #9db4ff33;
 }
