@@ -24,7 +24,7 @@ test("visitors cannot open protected routes or private photos", async ({ page })
   for (const path of ["/profile", "/profile/photo", "/history", "/history/created", "/history/collection", "/discover"]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator("h1")).toContainText("Your camera roll.");
+    await expect(page.locator("h1")).toContainText("Create captions");
     await expect(page.getByRole("button", { name: "Sign in with Google", exact: true }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: "Profile", exact: true })).toHaveCount(0);
   }

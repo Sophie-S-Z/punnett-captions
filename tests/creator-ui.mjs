@@ -43,7 +43,7 @@ await write(
 );
 await write(
   "app/page.tsx",
-  `import {CaptionCreator} from '../CaptionCreator';export default function Page(){return <div className="app-shell"><main id="main"><section className="caption-intro"><div><h1>Make the photo funnier.</h1><p>Isolated creator fixture. No provider call.</p></div></section><CaptionCreator/></main></div>}`,
+  `import {CaptionCreator} from '../CaptionCreator';export default function Page(){return <div className="app-shell"><main id="main"><section className="caption-intro"><h1>Create captions</h1><p className="intro">Upload an image and choose a caption to share.</p></section><CaptionCreator/></main></div>}`,
 );
 const build = spawn(
   process.execPath,
