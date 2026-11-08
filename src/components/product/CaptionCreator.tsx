@@ -110,7 +110,7 @@ export function CaptionCreator() {
         <input id="create-image" name="image" ref={input} type="file" className="visually-hidden" tabIndex={-1} accept="image/*" onChange={onFile} disabled={pending} aria-describedby="image-limits" />
         <button type="button" className="app-button choose-image" onClick={() => input.current?.click()} disabled={pending}>Choose image</button>
         <div className="create-camera"><button type="button" className="app-button button-quiet" onClick={() => camera.current?.click()} disabled={pending}>Take a photo</button><input ref={camera} type="file" accept="image/*" capture="environment" onChange={onFile} disabled={pending} className="visually-hidden" tabIndex={-1} aria-label="Take a photo with your camera" /></div>
-        <p id="image-limits" className="field-help">JPEG, PNG, WebP, or GIF. Up to 8 MB. Resized before upload.</p>
+        <p id="image-limits" className="field-help">JPEG, PNG, WebP, or GIF. Up to 8 MB. Resized before upload. Animated images use a still frame.</p>
         {file ? <button type="button" className="app-button button-quiet" onClick={removePhoto} disabled={pending}>Remove image</button> : null}
       </div>
       <div className="create-instructions">

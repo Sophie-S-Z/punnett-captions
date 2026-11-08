@@ -33,3 +33,9 @@ Historical catalog documents are deployment provenance, not active app data or c
 The 2026-10-15 caption studio adds optional tone presets, a context-length counter, searchable creations, Chosen/Passed vote filters, and reduced-motion-safe upload/selection details. See docs/design-references.md for reviewed components and adaptations.
 
 Hosted validation is manual-only while GitHub Actions minutes are exhausted. The release is checked locally and built by Vercel independently of Actions.
+
+## Verified image formats
+
+JPEG, PNG, WebP, and GIF are accepted. Transparent PNG/WebP images flatten onto white; animated images become one still image. Inputs are resized, oriented and converted to a bounded JPEG for private storage and captioning. The same decoder is covered by format, transparency, animation, metadata, size and invalid-input tests in this app.
+
+Repository and Vercel project: `punnett-captions`. Earlier deployment URLs and stable-domain aliases are retained for grading compatibility. Local checkout folder names are unchanged. GitHub Actions remains manual-only.
