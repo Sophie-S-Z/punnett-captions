@@ -14,7 +14,7 @@ const mono = Geist_Mono({
   display: "swap",
 });
 export const metadata: Metadata = {
-  title: "Punnett | AI captions & memes",
+  title: "Punnett Captions",
   description:
     "Turn your photos into funny AI captions. Upload an image, choose a tone, compare captions, and revisit your image and caption history.",
 };

@@ -15,13 +15,13 @@ export async function AppHeader() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Link href="/" className="brand" aria-label="Punnett home">
+      <Link href="/" className="brand" aria-label="Punnett Captions home">
         <span className="brand-mark" aria-hidden="true">
           <BrandMark />
         </span>
         <span>
           Punnett
-          <span className="brand-subtitle">AI captions</span>
+          <span className="brand-subtitle">Captions</span>
         </span>
       </Link>
       <div className="app-header-tools">

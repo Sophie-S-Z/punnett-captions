@@ -1,4 +1,4 @@
-# Punnett: AI captions
+# Punnett Captions
 
 Punnett turns uploaded photos, screenshots, and memes into original funny AI captions. Signed-in users generate captions, compare two captions for the same image, and keep image-based creation and voting histories. Captions can be copied or downloaded as memes.
 
@@ -31,3 +31,5 @@ AGENTS.md prohibits agent changes to RLS policies. The owner must configure Stor
 Historical catalog documents are deployment provenance, not active app data or current product instructions. Do not rerun their seeds or migrations.
 
 The 2026-10-15 caption studio adds optional tone presets, a context-length counter, searchable creations, Chosen/Passed vote filters, and reduced-motion-safe upload/selection details. See docs/design-references.md for reviewed components and adaptations.
+
+Hosted validation is manual-only while GitHub Actions minutes are exhausted. The release is checked locally and built by Vercel independently of Actions.

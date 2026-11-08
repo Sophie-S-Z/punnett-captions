@@ -57,7 +57,7 @@ export function CaptionVoting({ signedIn, initialPair, initialError }: CaptionVo
         toast("This pair was already judged. Loading the next pair.");
       } else {
         setWinner(chosen.id);
-        toast.success("Selection saved.");
+        toast.success("Vote saved.");
         // This brief pause displays the persisted result, rather than predicting a vote.
         if (!reduceMotion) await new Promise(resolve => setTimeout(resolve, 350));
       }
