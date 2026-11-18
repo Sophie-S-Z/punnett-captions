@@ -105,7 +105,7 @@ test.describe("actual authenticated rating acceptance", () => {
     const winnerText = (await cards.nth(0).getAttribute("aria-label"))!.replace(/^Choose caption A: /, "");
     const loserText = (await cards.nth(1).getAttribute("aria-label"))!.replace(/^Choose caption B: /, "");
     await cards.first().click();
-    await expect(page.getByText("Selection saved.", { exact: true })).toBeVisible();
+    await expect(page.getByText("Vote saved.", { exact: true })).toBeVisible();
     await expect(page.getByRole("region", { name: "Vote on captions", exact: true })).toHaveAttribute("aria-busy", "false");
     await page.goto("/history");
     await expect(page.getByText(winnerText, { exact: true })).toBeVisible();
